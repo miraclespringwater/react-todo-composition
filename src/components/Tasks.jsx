@@ -8,6 +8,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
 
   const createTask = (title) => {
+    console.log("creating task", title);
     setTasks((oldTasks) => [
       ...oldTasks,
       { id: genId(), title, completed: false },
@@ -37,6 +38,8 @@ const Tasks = () => {
       });
     });
   };
+
+  console.log(tasks);
 
   return (
     <div>

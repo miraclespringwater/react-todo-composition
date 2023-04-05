@@ -1,3 +1,23 @@
 .app button {
-  margin-left: 10px;
+  margin-right: 10px;
+}
+
+input ~ span {
+  display: none;
+}
+
+input{
+  all: unset;
+  padding: 15px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+input:invalid[focused="true"] {
+  border: 1px solid red;
+}
+
+input:invalid[focused="true"] ~ span{
+  display: block;
 }

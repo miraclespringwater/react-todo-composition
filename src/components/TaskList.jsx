@@ -1,14 +1,21 @@
+import { Fragment } from "react";
 import TaskShow from "./TaskShow";
 
 const TaskList = ({ tasks, onDelete, onComplete }) => {
+  console.log("task list tasks:", tasks);
   return (
-    <div>
+    <Fragment>
       {tasks.map((task) => {
         return (
-          <TaskShow task={task} onDelete={onDelete} onComplete={onComplete} />
+          <TaskShow
+            key={task.id}
+            task={task}
+            onDelete={onDelete}
+            onComplete={onComplete}
+          />
         );
       })}
-    </div>
+    </Fragment>
   );
 };
 
