@@ -21,3 +21,11 @@ input:invalid[focused="true"] {
 input:invalid[focused="true"] ~ span{
   display: block;
 }
+
+/* input:invalid { */
+/*   border: 1px solid red; */
+/* } */
+/**/
+/* input:invalid ~ span{ */
+/*   display: block; */
+/* } */

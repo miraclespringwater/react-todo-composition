@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import Form from "./Form";
 import FormInput from "./FormInput";
 
 const inputs = [
@@ -7,6 +8,7 @@ const inputs = [
     name: "task",
     type: "text",
     placeholder: "I need to do this...",
+    initialValue: "",
     errorMessage: "Task cannot be empty.",
     label: "New Task",
     pattern: "^[A-Za-z0-9\\s]{1,}",
@@ -19,35 +21,40 @@ const initialState = {
 };
 
 const TaskCreate = ({ onCreate }) => {
-  const [values, setValues] = useState(initialState);
+  // const [values, setValues] = useState(initialState);
 
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
-  };
+  // const handleChange = (event) => {
+  //   setValues({
+  //     ...values,
+  //     [event.target.name]: event.target.value,
+  //   });
+  // };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onCreate(values.task.trim());
-    setValues(initialState);
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   onCreate(values.task.trim());
+  //   setValues(initialState);
+  // };
 
-  const renderedInputs = inputs.map((input) => {
-    return (
-      <FormInput
-        key={input.id}
-        {...input}
-        value={values[input.name]}
-        onChange={handleChange}
-      />
-    );
-  });
+  // const renderedInputs = inputs.map((input) => {
+  //   return (
+  //     <FormInput
+  //       key={input.id}
+  //       {...input}
+  //       value={values[input.name]}
+  //       onChange={handleChange}
+  //     />
+  //   );
+  // });
+  //
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>{renderedInputs}</form>
+      {/* <form onSubmit={handleSubmit}>{renderedInputs}</form> */}
+      <Form
+        inputs={inputs}
+        onSubmit={(values) => onCreate(values.task.trim())}
+      />
     </div>
   );
 };

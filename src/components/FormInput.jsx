@@ -1,5 +1,12 @@
 import { Fragment, useState } from "react";
-const FormInput = ({ label, errorMessage, onChange, id, ...rest }) => {
+const FormInput = ({
+  label,
+  errorMessage,
+  onChange,
+  id,
+  initialValue,
+  ...rest
+}) => {
   const [focused, setFocused] = useState(false);
 
   const handleFocus = (event) => {
