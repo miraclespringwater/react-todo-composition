@@ -1,10 +1,14 @@
 import { useState } from "react";
+import useFilter from "../hooks/useFilter";
 import genId from "../utils/genId";
 import TaskList from "./TaskList";
 import TaskForm from "./TaskForm";
+import TaskFilter from "./TaskFilter";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
+
+  const { filteredData: filteredTasks, setFilter } = useFilter(tasks);
 
   const createTask = (task) => {
     setTasks((oldTasks) => [
@@ -30,10 +34,8 @@ const Tasks = () => {
   };
 
   const editTaskById = (id, newTaskData) => {
-    console.log("new task data", newTaskData);
     setTasks((oldTasks) => {
       return oldTasks.map((task) => {
-        console.log("editing task", { ...task, ...newTaskData });
         return (task.id === id && { ...task, ...newTaskData }) || task;
       });
     });
@@ -43,11 +45,12 @@ const Tasks = () => {
     <div>
       <TaskForm onSubmit={createTask} tasks={tasks} />
       <TaskList
-        tasks={tasks}
+        tasks={filteredTasks}
         onDelete={deleteTaskById}
         onComplete={completeTaskById}
         onEdit={editTaskById}
       />
+      <TaskFilter setFilter={setFilter} />
     </div>
   );
 };

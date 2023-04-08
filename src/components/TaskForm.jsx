@@ -3,14 +3,6 @@ import { useForm } from "react-hook-form";
 import useDebounce from "../hooks/useDebounce";
 
 const TaskForm = ({ onSubmit, tasks, currentTask }) => {
-  let defaultValues;
-
-  if (currentTask) {
-    defaultValues = { title: currentTask.title };
-  } else {
-    defaultValues = { title: "" };
-  }
-
   const {
     register,
     formState: { errors },
@@ -19,7 +11,11 @@ const TaskForm = ({ onSubmit, tasks, currentTask }) => {
     clearErrors,
     setError,
     setFocus,
-  } = useForm({ defaultValues });
+  } = useForm({
+    defaultValues: {
+      title: currentTask?.title || "",
+    },
+  });
 
   const isDuplicateTask = (data) => {
     let allTasks = [...tasks];
