@@ -6,17 +6,17 @@
 /*   display: none; */
 /* } */
 
-input{
-  all: unset;
-  padding: 15px;
-  margin: 10px 0px;
-  border-radius: 5px;
-  border: 1px solid gray;
-}
+/* input{ */
+/*   all: unset; */
+/*   padding: 15px; */
+/*   margin: 10px 0px; */
+/*   border-radius: 5px; */
+/*   border: 1px solid gray; */
+/* } */
 
-input ~ span {
-  display: block;
-}
+/* input ~ span { */
+/*   display: block; */
+/* } */
 
 /* input:invalid[focused="true"] { */
 /*   border: 1px solid red; */

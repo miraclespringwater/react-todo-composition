@@ -1,8 +1,7 @@
 import { useState } from "react";
 import genId from "../utils/genId";
-import TaskCreate from "./TaskCreate";
-import TaskShow from "./TaskShow";
 import TaskList from "./TaskList";
+import TaskForm from "./TaskForm";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -42,7 +41,7 @@ const Tasks = () => {
 
   return (
     <div>
-      <TaskCreate onCreate={createTask} tasks={tasks} />
+      <TaskForm onSubmit={createTask} tasks={tasks} />
       <TaskList
         tasks={tasks}
         onDelete={deleteTaskById}

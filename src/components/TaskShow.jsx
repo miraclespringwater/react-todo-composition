@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TaskEdit from "./TaskEdit";
+import TaskForm from "./TaskForm";
 
 const TaskShow = ({ task, tasks, onComplete, onDelete, onEdit }) => {
   const [showEdit, setShowEdit] = useState(false);
@@ -24,7 +24,7 @@ const TaskShow = ({ task, tasks, onComplete, onDelete, onEdit }) => {
         style={(task.completed && { textDecoration: "line-through" }) || null}
       >
         {(showEdit && (
-          <TaskEdit tasks={tasks} onEdit={handleEdit} currentTask={task} />
+          <TaskForm tasks={tasks} onSubmit={handleEdit} currentTask={task} />
         )) ||
           task.title}
       </span>
