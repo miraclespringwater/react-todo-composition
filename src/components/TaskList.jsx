@@ -3,7 +3,7 @@ import TaskShow from "./TaskShow";
 
 const TaskList = ({ tasks, onDelete, onComplete, onEdit }) => {
   return (
-    <Fragment>
+    <ul>
       {tasks.map((task) => {
         return (
           <TaskShow
@@ -16,7 +16,7 @@ const TaskList = ({ tasks, onDelete, onComplete, onEdit }) => {
           />
         );
       })}
-    </Fragment>
+    </ul>
   );
 };
 
