@@ -40,7 +40,7 @@ const TaskForm = ({ onSubmit, tasks, currentTask }) => {
     }
   };
 
-  const delayedClearErrors = useDebounce(clearErrors, 5000);
+  const delayedClearErrors = useDebounce(clearErrors);
   if (Object.keys(errors).length > 0) {
     delayedClearErrors();
   }

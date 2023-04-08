@@ -1,6 +1,6 @@
 const { useEffect, useRef } = require("react");
 
-function useDebounce(func, delay = 1000) {
+function useDebounce(func, delay = 5000) {
   const timer = useRef();
 
   useEffect(() => {

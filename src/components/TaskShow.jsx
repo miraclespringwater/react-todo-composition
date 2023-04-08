@@ -1,7 +1,14 @@
 import { useState } from "react";
 import TaskForm from "./TaskForm";
 
-const TaskShow = ({ task, tasks, onComplete, onDelete, onEdit }) => {
+const TaskShow = ({
+  task,
+  tasks,
+  onComplete,
+  onDelete,
+  onEdit,
+  renderEditForm,
+}) => {
   const [showEdit, setShowEdit] = useState(false);
 
   const handleEditClick = () => {
@@ -23,10 +30,7 @@ const TaskShow = ({ task, tasks, onComplete, onDelete, onEdit }) => {
       <span
         style={(task.completed && { textDecoration: "line-through" }) || null}
       >
-        {(showEdit && (
-          <TaskForm tasks={tasks} onSubmit={handleEdit} currentTask={task} />
-        )) ||
-          task.title}
+        {(showEdit && renderEditForm(handleEdit)) || task.title}
       </span>
     </li>
   );
