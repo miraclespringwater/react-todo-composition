@@ -50,9 +50,13 @@ const TaskForm = ({ onSubmit, tasks, currentTask }) => {
   }, [setFocus]);
 
   return (
-    <form onSubmit={handleSubmit(formSubmit)}>
-      {!currentTask && <label>Task Name:</label>}
+    <form className="inline flex flex-col" onSubmit={handleSubmit(formSubmit)}>
+      {/* {!currentTask && <label className="">Task Name:</label>} */}
       <input
+        className="shadow appearance-none border
+                   rounded w-full py-2 px-3 text-gray-700
+                   leading-tight focus:outline-none
+                   focus:shadow-outline"
         type="text"
         placeholder="I need to..."
         autoFocus
