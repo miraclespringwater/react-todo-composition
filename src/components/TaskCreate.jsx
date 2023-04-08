@@ -1,60 +1,60 @@
-import { useState, Fragment } from "react";
-import Form from "./Form";
-import FormInput from "./FormInput";
+import { useForm } from "react-hook-form";
+import useDebounce from "../hooks/useDebounce";
 
-const inputs = [
-  {
-    id: 1,
-    name: "task",
-    type: "text",
-    placeholder: "I need to do this...",
-    initialValue: "",
-    errorMessage: "Task cannot be empty.",
-    label: "New Task",
-    pattern: "^[A-Za-z0-9\\s]{1,}",
-    required: true,
-  },
-];
+const TaskCreate = ({ onCreate, tasks }) => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+    clearErrors,
+    setError,
+  } = useForm({
+    defaultValues: {
+      title: "",
+    },
+  });
 
-const initialState = {
-  task: "",
-};
+  const isDuplicateTask = (data) =>
+    tasks.some((task) => {
+      return task.title?.toLowerCase() === data.title.toLowerCase();
+    });
 
-const TaskCreate = ({ onCreate }) => {
-  // const [values, setValues] = useState(initialState);
+  const onSubmit = (data) => {
+    if (isDuplicateTask(data)) {
+      setError(
+        "title",
+        { type: "custom", message: "Cannot enter duplicate tasks." },
+        { shouldFocus: true }
+      );
+    } else {
+      onCreate(data);
+      reset();
+    }
+  };
 
-  // const handleChange = (event) => {
-  //   setValues({
-  //     ...values,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   onCreate(values.task.trim());
-  //   setValues(initialState);
-  // };
-
-  // const renderedInputs = inputs.map((input) => {
-  //   return (
-  //     <FormInput
-  //       key={input.id}
-  //       {...input}
-  //       value={values[input.name]}
-  //       onChange={handleChange}
-  //     />
-  //   );
-  // });
-  //
+  const delayedClearErrors = useDebounce(clearErrors, 5000);
+  if (Object.keys(errors).length > 0) {
+    delayedClearErrors();
+  }
 
   return (
     <div>
-      {/* <form onSubmit={handleSubmit}>{renderedInputs}</form> */}
-      <Form
-        inputs={inputs}
-        onSubmit={(values) => onCreate(values.task.trim())}
-      />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>New task:</label>
+        <input
+          type="text"
+          placeholder="I need to..."
+          {...register("title", {
+            required: "Please enter a task.",
+            minLength: {
+              value: 3,
+              message: "Task must be at least 3 characters.",
+            },
+          })}
+        />
+        {errors.title && <span>{errors.title?.message}</span>}
+      </form>
     </div>
   );
 };

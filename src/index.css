@@ -2,9 +2,9 @@
   margin-right: 10px;
 }
 
-input ~ span {
-  display: none;
-}
+/* input ~ span { */
+/*   display: none; */
+/* } */
 
 input{
   all: unset;
@@ -14,13 +14,17 @@ input{
   border: 1px solid gray;
 }
 
-input:invalid[focused="true"] {
-  border: 1px solid red;
-}
-
-input:invalid[focused="true"] ~ span{
+input ~ span {
   display: block;
 }
+
+/* input:invalid[focused="true"] { */
+/*   border: 1px solid red; */
+/* } */
+/**/
+/* input:invalid[focused="true"] ~ span{ */
+/*   display: block; */
+/* } */
 
 /* input:invalid { */
 /*   border: 1px solid red; */

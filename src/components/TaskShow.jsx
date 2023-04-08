@@ -1,5 +1,4 @@
 const TaskShow = ({ task, onComplete, onDelete }) => {
-  console.log("task show task:", task);
   return (
     <li>
       {!task.completed && (

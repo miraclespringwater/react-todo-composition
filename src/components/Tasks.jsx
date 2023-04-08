@@ -7,11 +7,10 @@ import TaskList from "./TaskList";
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
 
-  const createTask = (title) => {
-    console.log("creating task", title);
+  const createTask = (task) => {
     setTasks((oldTasks) => [
       ...oldTasks,
-      { id: genId(), title, completed: false },
+      { id: genId(), ...task, completed: false },
     ]);
   };
 
@@ -39,11 +38,9 @@ const Tasks = () => {
     });
   };
 
-  console.log(tasks);
-
   return (
     <div>
-      <TaskCreate onCreate={createTask} />
+      <TaskCreate onCreate={createTask} tasks={tasks} />
       <TaskList
         tasks={tasks}
         onDelete={deleteTaskById}
