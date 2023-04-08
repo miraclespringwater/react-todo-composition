@@ -3,7 +3,6 @@ const debounce = (func, delay) => {
   function debouncedFunc() {
     let self = this;
     let args = arguments;
-    console.log("clearing debounce");
     clearTimeout(timer);
     timer = setTimeout(() => {
       func.apply(self, args);
@@ -11,7 +10,6 @@ const debounce = (func, delay) => {
   }
 
   debouncedFunc.cancel = function () {
-    console.log("clearing debounce");
     clearTimeout(timer);
   };
 

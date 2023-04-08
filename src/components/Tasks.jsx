@@ -30,10 +30,12 @@ const Tasks = () => {
     );
   };
 
-  const editTaskById = (id, newTitle) => {
+  const editTaskById = (id, newTaskData) => {
+    console.log("new task data", newTaskData);
     setTasks((oldTasks) => {
-      oldTasks.map((task) => {
-        return (task.id === id && { ...task, title: newTitle }) || task;
+      return oldTasks.map((task) => {
+        console.log("editing task", { ...task, ...newTaskData });
+        return (task.id === id && { ...task, ...newTaskData }) || task;
       });
     });
   };

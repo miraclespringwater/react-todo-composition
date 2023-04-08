@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import useDebounce from "../hooks/useDebounce";
 
-const TaskCreate = ({ onCreate, tasks }) => {
+// changed onCreat to onEdit
+const TaskEdit = ({ onEdit, tasks, currentTask }) => {
   const {
     register,
     formState: { errors },
@@ -9,14 +11,20 @@ const TaskCreate = ({ onCreate, tasks }) => {
     reset,
     clearErrors,
     setError,
-  } = useForm({ defaultValues: { title: "" } });
+    setFocus,
+    // change default value to use currentTask
+  } = useForm({ defaultValues: { title: currentTask.title } });
 
-  const isDuplicateTask = (data, excludedId) =>
-    tasks.some((task) => {
-      return task.title?.toLowerCase() === data.title.toLowerCase();
-    });
+  const isDuplicateTask = (data) =>
+    tasks
+      .filter((task) => task.id !== currentTask.id)
+      .some((task) => {
+        return task.title?.toLowerCase() === data.title.toLowerCase();
+      });
+  // change to filter out current task when checking duplicates
 
   const onSubmit = (data) => {
+    console.log("edit form data", data);
     if (isDuplicateTask(data)) {
       setError(
         "title",
@@ -24,7 +32,8 @@ const TaskCreate = ({ onCreate, tasks }) => {
         { shouldFocus: true }
       );
     } else {
-      onCreate(data);
+      // change to onEdit
+      onEdit(data);
       reset();
     }
   };
@@ -34,14 +43,19 @@ const TaskCreate = ({ onCreate, tasks }) => {
     delayedClearErrors();
   }
 
+  useEffect(() => {
+    setFocus("title", { shouldSelect: true });
+  }, [setFocus]);
+
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>New task:</label>
+      {/* Change styling */}
+      <form className="task-edit-form" onSubmit={handleSubmit(onSubmit)}>
+        {/* Change label */}
+        <label>Task:</label>
         <input
           type="text"
-          placeholder="I need to..."
-          autoFocus
+          placeholder="Task name"
           {...register("title", {
             required: "Please enter a task.",
             minLength: {
@@ -56,4 +70,4 @@ const TaskCreate = ({ onCreate, tasks }) => {
   );
 };
 
-export default TaskCreate;
+export default TaskEdit;

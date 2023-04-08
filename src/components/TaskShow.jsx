@@ -1,14 +1,32 @@
-const TaskShow = ({ task, onComplete, onDelete }) => {
+import { useState } from "react";
+import TaskEdit from "./TaskEdit";
+
+const TaskShow = ({ task, tasks, onComplete, onDelete, onEdit }) => {
+  const [showEdit, setShowEdit] = useState(false);
+
+  const handleEditClick = () => {
+    setShowEdit(!showEdit);
+  };
+
+  const handleEdit = (data) => {
+    onEdit(task.id, data);
+    setShowEdit(false);
+  };
+
   return (
     <li>
       {!task.completed && (
         <button onClick={() => onComplete(task.id)}>Complete Task</button>
       )}
       <button onClick={() => onDelete(task.id)}>Delete Task</button>
+      <button onClick={() => handleEditClick()}>Edit Task</button>
       <span
         style={(task.completed && { textDecoration: "line-through" }) || null}
       >
-        {task.title}
+        {(showEdit && (
+          <TaskEdit tasks={tasks} onEdit={handleEdit} currentTask={task} />
+        )) ||
+          task.title}
       </span>
     </li>
   );

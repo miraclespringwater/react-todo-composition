@@ -8,7 +8,7 @@ function useDebounce(func, delay = 1000) {
       if (!timer.current) return;
       clearTimeout(timer.current);
     };
-  });
+  }, []);
 
   const debouncedFunction = (...args) => {
     const newTimer = setTimeout(() => {
